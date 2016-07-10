@@ -1,0 +1,30 @@
+{
+  "name": "gypkg-scoped-gpg",
+  "version": "1.0.0",
+  "description": "Wrapper of `scoped-gpg` for gypkg",
+  "bin": {
+    "gypkg-scoped-gpg": "bin/gypkg-scoped-gpg"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/gypkg/scoped-gpg.git"
+  },
+  "keywords": [
+    "gypkg",
+    "scoped",
+    "gpg"
+  ],
+  "author": "Fedor Indutny <fedor@indutny.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gypkg/scoped-gpg/issues"
+  },
+  "homepage": "https://github.com/gypkg/scoped-gpg#readme",
+  "dependencies": {
+    "gypkg-cmd-socket": "^1.0.0"
+  }
+}

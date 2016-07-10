@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+'use strict';
+
+const net = require('net');
+
+const host = process.env.GYPKG_CMD_HOST || '127.0.0.1';
+const port = process.env.GYPKG_CMD_PORT | 0;
+
+const CmdSocket = require('gypkg-cmd-socket');
+
+const socket = net.connect(port, host, () => {
+  const cmd = new CmdSocket(socket);
+
+  let chunks = '';
+  process.stdin.on('data', chunk => chunks += chunk);
+  process.stdin.on('end', () => {
+    cmd.send('scoped-gpg', {
+      argv: process.argv.slice(2),
+      scope: process.env.GYPKG_GPG_SCOPE,
+      stdin: chunks
+    });
+  });
+
+  cmd.on('scoped-gpg-result', () => {
+    socket.destroy();
+    process.stdout.write('\n[GNUPG:] GOODSIG git-doesnt-check this\n');
+  });
+});
